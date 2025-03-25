@@ -1,4 +1,7 @@
 <suite name="Cucumber Suite">
+    <listeners>
+        <listener class-name="com.example.utils.TestListener"/>
+    </listeners>
     <test name="Registration Test">
         <classes>
             <class name="com.example.runners.RegisterTestRunner"/>

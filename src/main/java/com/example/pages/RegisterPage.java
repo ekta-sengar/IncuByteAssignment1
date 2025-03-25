@@ -8,8 +8,9 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.example.utils.UserDataManager.isValidEmail;
+import static com.example.utils.UserDataManager.isValidPassword;
 
 public class RegisterPage extends BasePage {
     @FindBy(id = "firstname")
@@ -67,24 +68,7 @@ public class RegisterPage extends BasePage {
         createAnAccountBtn.click();
     }
 
-    public static boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$";
-        Pattern pattern = Pattern.compile(emailRegex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
 
-    public static boolean isValidPassword(String password) {
-        if (password.length() < 8) return false;
-
-        int classesCount = 0;
-        if (password.matches(".*[a-z].*")) classesCount++; // Lowercase
-        if (password.matches(".*[A-Z].*")) classesCount++; // Uppercase
-        if (password.matches(".*\\d.*")) classesCount++;  // Digits
-        if (password.matches(".*[@$!%*?&].*")) classesCount++; // Special characters
-
-        return classesCount >= 3;
-    }
 
     public void checkRegistrationValidations(List<Map<String, String>> userData) {
         for(Map<String, String> user : userData) {
@@ -117,7 +101,6 @@ public class RegisterPage extends BasePage {
                 Assert.assertEquals(passwordConfirmationErrorMsg.getText(),passwordMatchErrorMessage);
             }
             if(password1.length()<8) {
-                System.out.println(password1.length());
                 waitForElementVisibility(passwordErrorMsg, 5);
                 Assert.assertEquals(passwordErrorMsg.getText(), invalidPasswordLengthErrorMessage);
             }
