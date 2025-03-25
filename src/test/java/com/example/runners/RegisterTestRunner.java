@@ -6,6 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features/Register.feature",
         glue = "com/example/stepdefinitions",
+       // tags = "@RegisterFormValidationScenario and @RegisterSuccessfulScenario",
         plugin = {"pretty", "html:target/cucumber-reports.html"}
 )
 public class RegisterTestRunner extends AbstractTestNGCucumberTests {

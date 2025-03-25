@@ -4,13 +4,15 @@ import com.example.pages.HomePage;
 import com.example.pages.MyAccountPage;
 import com.example.pages.RegisterPage;
 import com.example.utils.DriverManager;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-import static org.testng.Assert.assertTrue;
+import java.util.List;
+import java.util.Map;
 
 public class RegisterSteps {
     RegisterPage registerPage = new RegisterPage();
@@ -37,5 +39,17 @@ public class RegisterSteps {
     @Then("I should be registered successfully")
     public void iShouldBeRegisteredSuccessfully() {
         Assert.assertTrue(myAccountPage.isWelcomeTextVisible());
+    }
+
+    @And("I validate the registration form fields")
+    public void iValidateTheRegistrationFormFields(DataTable data) {
+        List<Map<String, String>> userData = data.asMaps();
+        registerPage.checkRegistrationValidations(userData);
+    }
+
+    @Then("I validate required field validation for all fields")
+    public void iValidateRequiredFieldValidationForAllFields() {
+        registerPage.clickRegisterBtn();
+        registerPage.requiredFieldValidation();
     }
 }
