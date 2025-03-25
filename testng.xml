@@ -1,0 +1,13 @@
+<suite name="Cucumber Suite">
+    <test name="Registration Test">
+        <classes>
+            <class name="com.example.runners.RegisterTestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Login Test">
+        <classes>
+            <class name="com.example.runners.LoginTestRunner"/>
+        </classes>
+    </test>
+</suite>
