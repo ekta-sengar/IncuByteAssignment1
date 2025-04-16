@@ -9,5 +9,6 @@ public class HomeSteps {
     @Given("I am on home page")
     public void i_am_on_home_page() {
         DriverManager.getDriver().get("https://magento.softwaretestingboard.com/");
+
     }
 }
